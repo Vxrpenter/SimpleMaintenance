@@ -1,0 +1,8 @@
+name: SimpleMaintenance
+version: '${version}'
+main: dev.vxrp.simplemaintenance.SimpleMaintenance
+api-version: '1.20'
+commands:
+  simplemaintenance:
+    aliases: 'sm'
+    permission: 'sm.use'
