@@ -8,4 +8,5 @@ maintenance_information:
 time: 30
 #Motd
 basic_motd: "This is a minecraft server"
-maintenance_motd: ""
+maintenance_motd: "         &cCurrently under Maintenance %newline% &7Additional
+                   information https://www.example.com"
