@@ -10,6 +10,6 @@ public class MOTDManager  {
         this.motd = motd;
     }
     public Component build() {
-        return LegacyComponentSerializer.legacyAmpersand().deserialize(motd.replace("%newline%", System.lineSeparator()));
+        return LegacyComponentSerializer.legacyAmpersand().deserialize(motd.replace("%newline%", "\n"));
     }
 }
