@@ -1,8 +1,11 @@
 package dev.vxrp.simplemaintenance;
 
+import com.sun.tools.javac.Main;
 import dev.vxrp.simplemaintenance.commands.MaintenanceCommand;
+import dev.vxrp.simplemaintenance.events.ListPingEvent;
 import dev.vxrp.simplemaintenance.events.OnJoinEvent;
 import dev.vxrp.simplemaintenance.storage.Sqlite;
+import dev.vxrp.simplemaintenance.util.bStats.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,12 +25,16 @@ public final class SimpleMaintenance extends JavaPlugin {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        //bStats Metrics
+        int pluginId = 21277;
+        new Metrics(this, pluginId);
     }
     public void commands() {
         Objects.requireNonNull(getCommand("simplemaintenance")).setExecutor(new MaintenanceCommand(this));
     }
     public void events() {
         getServer().getPluginManager().registerEvents(new OnJoinEvent(this), this);
+        getServer().getPluginManager().registerEvents(new ListPingEvent(this), this);
     }
     public void database() {
         try {

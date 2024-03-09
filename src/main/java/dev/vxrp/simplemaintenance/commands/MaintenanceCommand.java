@@ -13,6 +13,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class MaintenanceCommand implements CommandExecutor {
     private final SimpleMaintenance plugin;
@@ -25,29 +26,35 @@ public class MaintenanceCommand implements CommandExecutor {
         int time = plugin.getConfig().getInt("time");
 
         if (args.length == 0) {
-            sender.sendMessage(mm.deserialize("<red>SM <gray>» <gray>Usage: /sm activate <red>| <gray>deactivate <red>| <gray>info"));
+            sender.sendMessage(mm.deserialize("<red>SM <gray>» <gray>Usage: [/sm activate <red>| <gray>deactivate <red>| <gray>info]"));
         } else {
             try {
                 if (args[0].equalsIgnoreCase("activate") && !plugin.getSqlite().getMaintenance()) {
-                    sender.sendMessage(mm.deserialize("<red>SM <gray>» <gray>Maintenance is now <green>activated"));
+                    sender.sendMessage(mm.deserialize("<red>SM <gray>» <gray>Maintenance is now <green>activated<newline>"));
                     plugin.getSqlite().updateMaintenance(true);
                     for (Player p : Bukkit.getOnlinePlayers()) {
-                        if (sender != p) {
-                            p.showTitle(Title.title(mm.deserialize("<gray>Maintenance activated"), mm.deserialize("<gray>You will be disconnected in " +
+                        if (sender != p && !p.hasPermission("sm.bypass")) {
+                            p.showTitle(Title.title(mm.deserialize("<gray>Maintenance <green>activated"), mm.deserialize("<gray>You will be disconnected in " +
                                     "<red>"+time+" <red>seconds")));
                             if (plugin.getConfig().getBoolean("maintenance_information.active")) {
                                 p.sendMessage(mm.deserialize("                          <gray>« <red>SM <gray>»<newline>"));
-                                p.sendMessage(mm.deserialize("<red>SM <gray>* <gray>Additional information on current maintenance --> <red><underlined><click:open_url:"
+                                p.sendMessage(mm.deserialize("<red>SM <gray>* <gray>Additional information on current maintenance --> <red><underlined><hover:show_text:'<gray>Click for additional information'><click:open_url:"
                                         +plugin.getConfig().getString("maintenance_information.link")+">support</click>"));
                                 p.sendMessage(mm.deserialize("<newline>                          <gray>« <red>SM <gray>»"));
                             }
                             BukkitScheduler scheduler = Bukkit.getScheduler();
                             scheduler.runTaskLater(plugin, () -> p.kick(mm.deserialize("<red>" + plugin.getConfig().getString("kick_message"))), time* 20L);
+                        } else if (p.hasPermission("sm.bypass")) {
+                            p.sendMessage(mm.deserialize("<red>SM <gray>» You won't be disconnected because you are permitted to<newline> be online while maintenance is running"));
+                            p.showTitle(Title.title(mm.deserialize("<gray>Maintenance <green>activated"), mm.deserialize("<red>You won't be disconnected ")));
                         }
                     }
                 }
                 if (args[0].equalsIgnoreCase("deactivate") && plugin.getSqlite().getMaintenance()) {
                     sender.sendMessage(mm.deserialize("<red>SM <gray>» <gray>Maintenance is now <red>deactivated"));
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        p.showTitle(Title.title(mm.deserialize("<gray>Maintenance <red>deactivated"), mm.deserialize("<gray>All player are able to join again ")));
+                    }
                     plugin.getSqlite().updateMaintenance(false);
                 }
                 if (args[0].equalsIgnoreCase("info")) {

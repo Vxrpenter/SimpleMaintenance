@@ -7,12 +7,12 @@
 [<img alt="modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg">]()
 [<img alt="hangar" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/hangar_vector.svg">]()
 
-**Supported Versions:** `1.20`
+**Supported Versions:** `1.20`, `1.20.1`, `1.20.2`, `1.20.4`
 
 ### Commands
-| Command | Aliases| Permission | Uses | Description|
-| --- | --- | --- | --- | --- |
-| simplemaintenance | `sm` | `sm.use` | `activate`, `deactivate`, `info`  | Used for activating and deactivating maintenance state, also gives info on current state |
+| Command | Aliases| Permission | Arguments | Description|
+| --- | --- | --- |---| --- |
+| simplemaintenance | `sm` | `sm.use` | `activate`, `deactivate`, `info` | Used for activating and deactivating maintenance state, also gives info on current state |
 
 ## Permissions
 - `sm.use` | to use the `simplemaintenance command`

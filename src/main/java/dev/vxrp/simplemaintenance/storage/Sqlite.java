@@ -8,7 +8,7 @@ public class Sqlite {
         connection = DriverManager.getConnection("jdbc:sqlite:" + path);
         try (Statement statement = connection.createStatement()) {
             statement.execute("CREATE TABLE IF NOT EXISTS Maintenance (" +
-                    "maintenance BOOLEAN, excluded VARCHAR)");
+                    "maintenance BOOLEAN)");
         }
     }
     public void setMaintenance(boolean state) throws SQLException {

@@ -1,6 +1,11 @@
+#Kick message
 kick_message: "Maintenance is active, you may not join this server until the potential problem is resolved"
+#Info
 maintenance_information:
   active: true
   link: "https://www.example.com"
 #Time until players get disconnected (in seconds)
 time: 30
+#Motd
+basic_motd: "This is a minecraft server"
+maintenance_motd: ""
