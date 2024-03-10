@@ -19,6 +19,7 @@ public class ListPingEvent implements Listener {
         Component maintenanceMotd = new MOTDManager(plugin.getConfig().getString("maintenance_motd")).build();
         Component basicMotd = new MOTDManager(plugin.getConfig().getString("basic_motd")).build();
         if (plugin.getSqlite().getMaintenance()) {
+            e.setHidePlayers(true);
             e.motd(maintenanceMotd);
         } else if (!plugin.getSqlite().getMaintenance()) {
             e.motd(basicMotd);
