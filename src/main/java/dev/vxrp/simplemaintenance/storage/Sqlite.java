@@ -1,7 +1,4 @@
 package dev.vxrp.simplemaintenance.storage;
-
-import org.bukkit.entity.Player;
-
 import java.sql.*;
 
 public class Sqlite {
