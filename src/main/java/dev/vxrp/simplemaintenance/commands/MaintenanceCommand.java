@@ -1,7 +1,6 @@
 package dev.vxrp.simplemaintenance.commands;
 
 import dev.vxrp.simplemaintenance.SimpleMaintenance;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
@@ -9,11 +8,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitScheduler;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
-import java.util.Objects;
 
 public class MaintenanceCommand implements CommandExecutor {
     private final SimpleMaintenance plugin;
@@ -42,8 +39,7 @@ public class MaintenanceCommand implements CommandExecutor {
                                         +plugin.getConfig().getString("maintenance_information.link")+">support</click>"));
                                 p.sendMessage(mm.deserialize("<newline>                          <gray>« <red>SM <gray>»"));
                             }
-                            BukkitScheduler scheduler = Bukkit.getScheduler();
-                            scheduler.runTaskLater(plugin, () -> p.kick(mm.deserialize("<red>" + plugin.getConfig().getString("kick_message"))), time* 20L);
+                            Bukkit.getScheduler().runTaskLater(plugin, () -> p.kick(mm.deserialize("<red>" + plugin.getConfig().getString("kick_message"))), time* 20L);
                         } else if (p.hasPermission("sm.bypass")) {
                             p.sendMessage(mm.deserialize("<red>SM <gray>» You won't be disconnected because you are permitted to<newline> be online while maintenance is running"));
                             p.showTitle(Title.title(mm.deserialize("<gray>Maintenance <green>activated"), mm.deserialize("<red>You won't be disconnected ")));

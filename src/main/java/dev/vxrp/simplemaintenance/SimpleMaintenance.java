@@ -1,6 +1,5 @@
 package dev.vxrp.simplemaintenance;
 
-import com.sun.tools.javac.Main;
 import dev.vxrp.simplemaintenance.commands.MaintenanceCommand;
 import dev.vxrp.simplemaintenance.events.ListPingEvent;
 import dev.vxrp.simplemaintenance.events.OnJoinEvent;
@@ -40,7 +39,7 @@ public final class SimpleMaintenance extends JavaPlugin {
         try {
             sqlite = new Sqlite(getDataFolder().getAbsolutePath() + "/data.db");
         } catch (SQLException e) {
-            System.out.println("Connection to database failed!" + e.getMessage());
+            Bukkit.getConsoleSender().sendMessage("Connection to database failed!" + e.getMessage());
             Bukkit.getPluginManager().disablePlugin(this);
         }
     }

@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class ListPingEvent implements Listener {
     private final SimpleMaintenance plugin;
@@ -16,9 +17,10 @@ public class ListPingEvent implements Listener {
     }
     @EventHandler
     public void onListPing(PaperServerListPingEvent e) throws SQLException {
-        Component maintenanceMotd = new MOTDManager(plugin.getConfig().getString("maintenance_motd")).build();
-        Component basicMotd = new MOTDManager(plugin.getConfig().getString("basic_motd")).build();
+        Component maintenanceMotd = MOTDManager.motd(Objects.requireNonNull(plugin.getConfig().getString("maintenance_motd")));
+        Component basicMotd = MOTDManager.motd(Objects.requireNonNull(plugin.getConfig().getString("basic_motd")));
         if (plugin.getSqlite().getMaintenance()) {
+            e.setHidePlayers(true);
             e.motd(maintenanceMotd);
         } else if (!plugin.getSqlite().getMaintenance()) {
             e.motd(basicMotd);
