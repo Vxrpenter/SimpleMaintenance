@@ -7,7 +7,7 @@
 [<img alt="modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg">](https://modrinth.com/plugin/simplemaintenance)
 [<img alt="hangar" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/hangar_vector.svg">](https://hangar.papermc.io/Vxrpenter/SimpleMaintenance)
 
-**Supported Versions:** `1.20`, `1.20.1`, `1.20.2`, `1.20.4`
+**Supported Versions:** `1.20 - 1.20.4`
 ## Correct Updating
 1. download the most recent version from [GitHub](https://github.com/Vxrpenter/SimpleMaintenance), [Modrinth](https://modrinth.com/project/simplemaintenance) or [Hangar](https://hangar.papermc.io/Vxrpenter/SimpleMaintenance)
 2. delete the old version
